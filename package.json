@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start:server": "json-server-auth --watch data/db.json --port 3001 -m ./node_modules/json-server-auth"
   },
   "dependencies": {
     "@fontsource-variable/geist": "^5.2.8",
@@ -15,6 +16,8 @@
     "@tailwindcss/vite": "^4.2.4",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "json-server": "0.17.4",
+    "json-server-auth": "^2.1.0",
     "lucide-react": "^1.14.0",
     "prettier": "^3.8.3",
     "radix-ui": "^1.4.3",

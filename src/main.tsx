@@ -4,9 +4,12 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
 import { Router } from "@/app/providers/router";
+import { StoreProvider } from "@/app/providers/store-provider.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <Router />
+    <StoreProvider>
+      <Router />
+    </StoreProvider>
   </StrictMode>,
 );
