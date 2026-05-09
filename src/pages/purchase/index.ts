@@ -1,1 +1,1 @@
-export { Page as PurchasePage } from "./Page";
+export { Page as PurchasePage } from "./page";

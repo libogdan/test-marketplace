@@ -1,9 +1,11 @@
+import { Container } from "@/shared/ui";
+
 export const Page = () => {
   return (
-    <div>
+    <Container>
       <section>
-        <h1>Home page</h1>
+        <h1>Главная страница</h1>
       </section>
-    </div>
+    </Container>
   );
 };
