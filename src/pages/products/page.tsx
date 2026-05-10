@@ -10,14 +10,34 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination.tsx";
+import { Filters } from "@/widgets/filter";
+import { useSearchParams } from "react-router";
 
 export const Page = () => {
   const [page, setPage] = useState(1);
 
-  const { data, isFetching } = useGetAllProductsQuery({ page, perPage: 10 });
+  const [searchParams] = useSearchParams();
+
+  const [category, search, priceFrom, priceTo] = [
+    searchParams.get("category") ?? undefined,
+    searchParams.get("search") ?? undefined,
+    searchParams.get("price_from") ?? undefined,
+    searchParams.get("price_to") ?? undefined,
+  ];
+
+  const { data, isFetching } = useGetAllProductsQuery({
+    page,
+    perPage: 10,
+    category,
+    search,
+    priceFrom,
+    priceTo,
+  });
   return (
     <Container>
       <Section>
+        <Filters />
+
         <div className="grid grid-cols-5 gap-4">
           {isFetching &&
             new Array(10)
@@ -25,7 +45,7 @@ export const Page = () => {
               .map((_, i) => <ProductCardSkeleton key={i} />)}
 
           {!isFetching &&
-            data?.map((product) => (
+            data?.data?.map((product) => (
               <ProductCard product={product} key={product.id} />
             ))}
         </div>
@@ -33,24 +53,26 @@ export const Page = () => {
         <div className="mt-8">
           <Pagination>
             <PaginationContent>
-              <PaginationItem onClick={() => setPage((prev) => prev - 1)}>
+              <PaginationItem
+                onClick={() => page > 1 && setPage((prev) => prev - 1)}
+              >
                 <PaginationPrevious text="Назад" />
               </PaginationItem>
 
-              <PaginationItem onClick={() => setPage(1)}>
-                <PaginationLink isActive={page === 1}>1</PaginationLink>
-              </PaginationItem>
-              <PaginationItem onClick={() => setPage(2)}>
-                <PaginationLink isActive={page === 2}>2</PaginationLink>
-              </PaginationItem>
-              <PaginationItem onClick={() => setPage(3)}>
-                <PaginationLink isActive={page === 3}>3</PaginationLink>
-              </PaginationItem>
-              <PaginationItem onClick={() => setPage(4)}>
-                <PaginationLink isActive={page === 4}>4</PaginationLink>
-              </PaginationItem>
+              {data &&
+                new Array(data?.last).fill(0).map((_, i) => (
+                  <PaginationItem onClick={() => setPage(i + 1)} key={i}>
+                    <PaginationLink isActive={page === i + 1}>
+                      {i + 1}
+                    </PaginationLink>
+                  </PaginationItem>
+                ))}
 
-              <PaginationItem onClick={() => setPage((prev) => prev + 1)}>
+              <PaginationItem
+                onClick={() =>
+                  page < (data?.last || 1) && setPage((prev) => prev + 1)
+                }
+              >
                 <PaginationNext text="Вперёд" />
               </PaginationItem>
             </PaginationContent>
