@@ -17,7 +17,7 @@ export const Page = () => {
               .map((_, i) => <ProductCardSkeleton key={i} />)}
 
           {!isFetching &&
-            data?.map((product) => (
+            data?.data?.map((product) => (
               <ProductCard product={product} key={product.id} />
             ))}
         </div>
