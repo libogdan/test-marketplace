@@ -1,14 +1,26 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+import type { Product } from "@/entities/products";
 import type { User } from "@/entities/user";
+import type { RootState } from "@/shared/model/store";
 
 import type { Dto } from "../model/schema";
-import type { Product } from "@/entities/products";
 
 export const authApi = createApi({
   reducerPath: "auth",
-  tagTypes: ["Me", "cart"],
-  baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_API_URL }),
+  tagTypes: ["me", "cart"],
+  baseQuery: fetchBaseQuery({
+    baseUrl: import.meta.env.VITE_API_URL,
+    prepareHeaders: (headers, { getState }) => {
+      const token = (getState() as RootState).authSlice.token;
+
+      if (token) {
+        headers.set("authorization", `Bearer ${token}`);
+      }
+
+      return headers;
+    },
+  }),
   endpoints: (builder) => ({
     signIn: builder.mutation<{ token: string; user: User }, Dto>({
       query: (body) => ({
@@ -27,18 +39,12 @@ export const authApi = createApi({
     me: builder.query<User, void>({
       query: () => ({
         url: "/auth/me",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
       }),
-      providesTags: ["Me"],
+      providesTags: ["me"],
     }),
     getCart: builder.query<Product[], void>({
       query: () => ({
         url: "/cart",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
       }),
       providesTags: ["cart"],
     }),
@@ -46,11 +52,8 @@ export const authApi = createApi({
       query: (productId) => ({
         url: "/cart/" + productId,
         method: "POST",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
       }),
-      invalidatesTags: ["Me", "cart"],
+      invalidatesTags: ["me", "cart"],
     }),
   }),
 });

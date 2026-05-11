@@ -10,6 +10,8 @@ import { ProductsPage } from "@/pages/products";
 import { PurchasePage } from "@/pages/purchase";
 import { Layout } from "@/shared/layout";
 
+import { RequireAuth } from "./require-auth";
+
 export const Router = () => {
   return (
     <BrowserRouter>
@@ -18,8 +20,8 @@ export const Router = () => {
           <Route path="/" element={<Layout />}>
             <Route path="/" element={<HomePage />} />
             <Route path="products" element={<ProductsPage />} />
-            <Route path="cart" element={<CartPage />} />
-            <Route path="purchase" element={<PurchasePage />} />
+            <Route path="cart" element={<RequireAuth><CartPage /></RequireAuth>} />
+            <Route path="purchase" element={<RequireAuth><PurchasePage /></RequireAuth>} />
 
             <Route path="auth">
               <Route path="signin" element={<SignInPage />} />
@@ -27,7 +29,7 @@ export const Router = () => {
             </Route>
 
             <Route path="admin">
-              <Route path="products" element={<AdminProductsPage />} />
+              <Route path="products" element={<RequireAuth><AdminProductsPage /></RequireAuth>} />
             </Route>
           </Route>
         </Routes>

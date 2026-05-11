@@ -1,6 +1,6 @@
-import { useGetCartQuery } from "@/features/auth/api/auth-api.ts";
-import { Container, Section } from "@/shared/ui";
 import { ProductCard, ProductCardSkeleton } from "@/entities/products";
+import { useGetCartQuery } from "@/features/auth/api/auth-api";
+import { Container, Section } from "@/shared/ui";
 
 export const Page = () => {
   const { data, isFetching } = useGetCartQuery();

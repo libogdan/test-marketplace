@@ -1,9 +1,9 @@
 import { Home, LogIn, LogOut, Settings, ShoppingCart } from "lucide-react";
 import { Link } from "react-router";
 
-import { Button } from "@/components/ui/button.tsx";
+import { Button } from "@/components/ui/button";
 import { logout } from "@/features/auth";
-import { useAppDispatch, useAppSelector } from "@/shared/model/hooks.ts";
+import { useAppDispatch, useAppSelector } from "@/shared/model/hooks";
 import { Container } from "@/shared/ui";
 import { SearchBar } from "@/widgets/search-bar";
 

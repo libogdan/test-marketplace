@@ -1,6 +1,6 @@
 import type { ComponentProps } from "react";
 
-import { cn } from "@/lib/utils.ts";
+import { cn } from "@/lib/utils";
 
 export const Section = ({ className, ...props }: ComponentProps<"div">) => {
   return (
