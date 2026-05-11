@@ -8,7 +8,7 @@ export const productsApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_API_URL }),
   endpoints: (builder) => ({
     getAllProducts: builder.query<
-      { data: Product[] } & PaginationMetadata,
+      { data: Product[] } & { meta: PaginationMetadata },
       {
         page?: number;
         perPage?: number;
@@ -23,20 +23,20 @@ export const productsApi = createApi({
 
         const query = new URLSearchParams();
 
-        query.append("_page", page.toString());
-        query.append("_per_page", perPage.toString());
+        query.append("page", page.toString());
+        query.append("limit", perPage.toString());
 
         if (arg?.category) {
-          query.append("category:eq", arg.category);
+          query.append("category", arg.category);
         }
         if (arg?.search) {
-          query.append("name:contains", arg.search);
+          query.append("search", arg.search);
         }
         if (arg?.priceFrom) {
-          query.append("price:gte", arg.priceFrom);
+          query.append("priceFrom", arg.priceFrom);
         }
         if (arg?.priceTo) {
-          query.append("price:lte", arg.priceTo);
+          query.append("priceTo", arg.priceTo);
         }
 
         return `/products?${query.toString()}`;

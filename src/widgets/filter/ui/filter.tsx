@@ -1,3 +1,9 @@
+import { FilterX, Search } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router";
+
+import { Button } from "@/components/ui/button.tsx";
+import { Input } from "@/components/ui/input.tsx";
 import {
   Select,
   SelectContent,
@@ -5,11 +11,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select.tsx";
-import { Input } from "@/components/ui/input.tsx";
-import { Button } from "@/components/ui/button.tsx";
-import { FilterX, Search } from "lucide-react";
-import { useSearchParams } from "react-router";
-import { useEffect, useState } from "react";
 
 export const Filters = () => {
   const [category, setCategory] = useState("");

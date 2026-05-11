@@ -1,7 +1,6 @@
-import { Container, Section } from "@/shared/ui";
-import { useGetAllProductsQuery } from "@/features/products";
-import { ProductCard, ProductCardSkeleton } from "@/entities/products";
 import { useState } from "react";
+import { useSearchParams } from "react-router";
+
 import {
   Pagination,
   PaginationContent,
@@ -10,8 +9,10 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination.tsx";
+import { ProductCard, ProductCardSkeleton } from "@/entities/products";
+import { useGetAllProductsQuery } from "@/features/products";
+import { Container, Section } from "@/shared/ui";
 import { Filters } from "@/widgets/filter";
-import { useSearchParams } from "react-router";
 
 export const Page = () => {
   const [page, setPage] = useState(1);
@@ -60,7 +61,7 @@ export const Page = () => {
               </PaginationItem>
 
               {data &&
-                new Array(data?.last).fill(0).map((_, i) => (
+                new Array(data?.meta.pages).fill(0).map((_, i) => (
                   <PaginationItem onClick={() => setPage(i + 1)} key={i}>
                     <PaginationLink isActive={page === i + 1}>
                       {i + 1}
@@ -70,7 +71,7 @@ export const Page = () => {
 
               <PaginationItem
                 onClick={() =>
-                  page < (data?.last || 1) && setPage((prev) => prev + 1)
+                  page < (data?.meta.pages || 1) && setPage((prev) => prev + 1)
                 }
               >
                 <PaginationNext text="Вперёд" />

@@ -1,9 +1,9 @@
 import { Search } from "lucide-react";
+import { useState } from "react";
+import { useNavigate } from "react-router";
 
 import { Button } from "@/components/ui/button.tsx";
 import { Input } from "@/components/ui/input.tsx";
-import { useState } from "react";
-import { useNavigate } from "react-router";
 
 export const SearchBar = () => {
   const [searchValue, setSearchValue] = useState("");

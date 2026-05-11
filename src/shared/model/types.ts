@@ -1,7 +1,6 @@
 export interface PaginationMetadata {
-  first: number;
-  last: number;
-  next: number;
-  items: number;
-  prev: number | null;
+  limit: number;
+  page: number;
+  total: number;
+  pages: number;
 }
