@@ -1,9 +1,12 @@
+import { SignUpForm } from "@/features/auth";
+import { Container, Section } from "@/shared/ui";
+
 export const Page = () => {
   return (
-    <div>
-      <section>
-        <h1>Signup page</h1>
-      </section>
-    </div>
+    <Container>
+      <Section className="grid place-items-center min-h-[calc(100dvh-84px)]">
+        <SignUpForm />
+      </Section>
+    </Container>
   );
 };
