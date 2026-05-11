@@ -1,9 +1,27 @@
+import { useGetCartQuery } from "@/features/auth/api/auth-api.ts";
+import { Container, Section } from "@/shared/ui";
+import { ProductCard, ProductCardSkeleton } from "@/entities/products";
+
 export const Page = () => {
+  const { data, isFetching } = useGetCartQuery();
+
   return (
-    <div>
-      <section>
-        <h1>Cart page</h1>
-      </section>
-    </div>
+    <Container>
+      <Section>
+        <h1 className="mb-4 text-xl font-semibold">Корзина</h1>
+
+        <div className="grid grid-cols-5 gap-4">
+          {isFetching &&
+            new Array(10)
+              .fill(0)
+              .map((_, i) => <ProductCardSkeleton key={i} />)}
+
+          {!isFetching &&
+            data?.map((product) => (
+              <ProductCard product={product} key={product.id} />
+            ))}
+        </div>
+      </Section>
+    </Container>
   );
 };

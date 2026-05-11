@@ -12,9 +12,7 @@ export const Page = () => {
 
         <div className="grid grid-cols-5 gap-4">
           {isFetching &&
-            new Array(10)
-              .fill(0)
-              .map((_, i) => <ProductCardSkeleton key={i} />)}
+            new Array(5).fill(0).map((_, i) => <ProductCardSkeleton key={i} />)}
 
           {!isFetching &&
             data?.data?.map((product) => (
