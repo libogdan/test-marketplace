@@ -1,10 +1,11 @@
 import { useMemo, useState } from "react";
+import { useDispatch } from "react-redux";
+
+import { Button } from "@/components/ui/button.tsx";
 import { ProductListItem } from "@/entities/products";
+import { openOrder } from "@/features/auth";
 import { useGetCartQuery } from "@/features/auth/api/auth-api";
 import { Container, Section } from "@/shared/ui";
-import { Button } from "@/components/ui/button.tsx";
-import { useDispatch } from "react-redux";
-import { openOrder } from "@/features/auth";
 
 export const Page = () => {
   const { data, isLoading } = useGetCartQuery();

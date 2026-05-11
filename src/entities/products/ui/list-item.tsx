@@ -1,4 +1,5 @@
 import { Minus, Plus } from "lucide-react";
+
 import type { Product } from "@/entities/products";
 
 interface Props {

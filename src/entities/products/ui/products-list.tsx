@@ -1,9 +1,6 @@
-import {
-  type Product,
-  ProductCard,
-  ProductCardSkeleton,
-} from "@/entities/products";
 import { CloudAlert, Grid2X2X } from "lucide-react";
+import type { Dispatch, SetStateAction } from "react";
+
 import {
   Pagination,
   PaginationContent,
@@ -12,8 +9,12 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination.tsx";
+import {
+  type Product,
+  ProductCard,
+  ProductCardSkeleton,
+} from "@/entities/products";
 import type { PaginationMetadata } from "@/shared/model/types.ts";
-import type { Dispatch, SetStateAction } from "react";
 
 type Props =
   | {

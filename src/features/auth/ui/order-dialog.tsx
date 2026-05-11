@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { orderSchema, type OrderDto } from "@/features/auth";
+import { type OrderDto,orderSchema } from "@/features/auth";
 import { closeOrder } from "@/features/auth/model/auth-slice";
 import { useAppDispatch, useAppSelector } from "@/shared/model/hooks";
 

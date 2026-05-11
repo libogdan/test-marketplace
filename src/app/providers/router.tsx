@@ -8,9 +8,9 @@ import { CartPage } from "@/pages/cart";
 import { HomePage } from "@/pages/home";
 import { ProductsPage } from "@/pages/products";
 import { Layout } from "@/shared/layout";
+import { ErrorBoundary } from "@/shared/ui";
 
 import { RequireAuth } from "./require-auth";
-import { ErrorBoundary } from "@/shared/ui";
 
 export const Router = () => {
   return (
