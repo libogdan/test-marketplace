@@ -4,6 +4,7 @@ import type { Product } from "@/entities/products";
 import type { Dto } from "@/features/products";
 import type { RootState } from "@/shared/model/store";
 import type { PaginationMetadata } from "@/shared/model/types";
+import { ApiPaths } from "@/shared/api/paths";
 
 export const productsApi = createApi({
   reducerPath: "products",
@@ -53,13 +54,13 @@ export const productsApi = createApi({
           query.append("priceTo", arg.priceTo);
         }
 
-        return `/products?${query.toString()}`;
+        return `${ApiPaths.products.get}?${query.toString()}`;
       },
       providesTags: ["product"],
     }),
     createProduct: builder.mutation<void, Dto>({
       query: (body) => ({
-        url: "/products",
+        url: ApiPaths.products.create,
         method: "POST",
         body,
       }),
@@ -67,7 +68,7 @@ export const productsApi = createApi({
     }),
     updateProduct: builder.mutation<void, { id: string; data: Dto }>({
       query: ({ id, data }) => ({
-        url: `/products/${id}`,
+        url: ApiPaths.products.update(id),
         method: "PATCH",
         body: data,
       }),
@@ -75,7 +76,7 @@ export const productsApi = createApi({
     }),
     deleteProduct: builder.mutation<void, string>({
       query: (id) => ({
-        url: `/products/${id}`,
+        url: ApiPaths.products.delete(id),
         method: "DELETE",
       }),
       invalidatesTags: ["product"],
