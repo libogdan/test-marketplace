@@ -2,10 +2,10 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 import type { Product } from "@/entities/products";
 import type { User } from "@/entities/user";
+import { ApiPaths } from "@/shared/api/paths";
 import type { RootState } from "@/shared/model/store";
 
 import type { Dto } from "../model/schema";
-import { ApiPaths } from "@/shared/api/paths";
 
 export const authApi = createApi({
   reducerPath: "auth",

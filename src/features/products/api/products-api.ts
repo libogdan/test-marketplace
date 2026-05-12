@@ -2,9 +2,9 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 import type { Product } from "@/entities/products";
 import type { Dto } from "@/features/products";
+import { ApiPaths } from "@/shared/api/paths";
 import type { RootState } from "@/shared/model/store";
 import type { PaginationMetadata } from "@/shared/model/types";
-import { ApiPaths } from "@/shared/api/paths";
 
 export const productsApi = createApi({
   reducerPath: "products",
